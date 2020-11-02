@@ -1,0 +1,10 @@
+.btn-cadastro{
+    background-color: #089;
+    color: #fff;
+}
+
+.btn-cadastro:hover{
+    background-color: #ffa500;
+    color: #fff;
+    transition: 0.3 ease-in-out;
+}

@@ -1,0 +1,22 @@
+body {
+  min-height: 100vh;
+  position: relative;
+  margin: 0;
+  padding-bottom: 100px;
+  box-sizing: border-box;
+}
+
+.form-login {
+  max-width: 650px;
+}
+
+.btn-cadastro {
+  background-color: #089;
+  color: #fff;
+}
+
+.btn-cadastro:hover {
+  background-color: #ffa500;
+  color: #fff;
+  transition: 0.3 ease-in-out;
+}

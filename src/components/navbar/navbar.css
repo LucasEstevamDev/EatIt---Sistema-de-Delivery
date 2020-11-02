@@ -1,0 +1,15 @@
+.navbar {
+  background-color: #006a77;
+}
+
+.nav-item a {
+  color: #fff;
+}
+
+.spanDropdown {
+  color: #000;
+}
+
+.spanDropdown:hover {
+  color: #ffa500;
+}

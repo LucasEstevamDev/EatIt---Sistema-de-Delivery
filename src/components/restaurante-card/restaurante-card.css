@@ -1,0 +1,22 @@
+.btn-detalhes {
+  background-color: #ffa500;
+  color: #fff;
+}
+
+.btn-detalhes:hover {
+  background-color: #089;
+  color: #fff;
+  transition: 0.3 ease-in;
+}
+
+.card-text-restaurante {
+  max-height: 100px;
+  min-height: 100px;
+  overflow: hidden;
+}
+
+.img-cartao {
+  max-height: 200px;
+  min-height: 200px;
+  min-width: 100%;
+}

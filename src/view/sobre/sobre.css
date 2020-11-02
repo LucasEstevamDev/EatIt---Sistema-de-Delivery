@@ -1,0 +1,17 @@
+.content-info {
+  margin-top: 50px;
+}
+
+.texto {
+  font-size: 18pt;
+}
+
+.profile-userpic img {
+  float: none;
+  margin: 0 auto;
+  width: 200px;
+  height: 200px;
+  -webkit-border-radius: 80% !important;
+  -moz-border-radius: 80% !important;
+  border-radius: 80% !important;
+}
