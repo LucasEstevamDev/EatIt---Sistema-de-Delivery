@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import { useSelector } from "react-redux";
 import './home_pratos.css';
 import Navbar from '../../components/navbar';
 import Footer from '../../components/footer';

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { Button, Modal } from 'react-bootstrap';
 import './finalizarpedido.css';
+import Navbar from '../../components/navbar';
 
 /* IMPORTAÇÃO REDUX */
 import { useSelector } from 'react-redux';
@@ -10,8 +10,6 @@ import { Link } from 'react-router-dom';
 
 /* IMPORTAÇÃO DO FIREBASE */
 import firebase from '../../config/firebase';
-
-import Navbar from '../../components/navbar';
 
 function FinalizarPedido(props) {
 
@@ -25,7 +23,7 @@ function FinalizarPedido(props) {
     const [restaurante, setRestaurante] = useState();
     const [valor, setValor] = useState();
     const [pagamento, setPagamento] = useState();
-    const [cpf, setCpf] = useState();
+    const [telefone, setTelefone] = useState();
     const [endereco, setEndereco] = useState();
     const [radioValue, setRadioValue] = useState(false);
     const usuarioEmail = useSelector(state => state.usuarioEmail);
@@ -48,30 +46,98 @@ function FinalizarPedido(props) {
         setMsgTipo(null);
         setCarregando(1);
 
-        if (!pagamento || !endereco) {
+        if (!pagamento || !endereco || !telefone) {
             setMsgTipo('erro')
             setMsg('Você precisa preencher todos os campos!')
             setCarregando(0)
             return;
+        } else if (troco == null) {
+            db.collection('pedido_cliente').add({
+                nome: nome,
+                restaurante: restaurante,
+                valor: valor,
+                pagamento: pagamento,
+                telefone: telefone,
+                endereco: endereco,
+                usuario: usuarioEmail,
+                criacao: new Date(),
+                ticket: 'aberto'
+            }).then(() => {
+                setMsgTipo('sucesso');
+                setCarregando(0);
+            }).catch(erro => {
+                setMsgTipo('erro');
+                setCarregando(0);
+            });
+        } else {
+            db.collection('pedido_cliente').add({
+                nome: nome,
+                restaurante: restaurante,
+                valor: valor,
+                pagamento: pagamento,
+                telefone: telefone,
+                troco: troco,
+                endereco: endereco,
+                usuario: usuarioEmail,
+                criacao: new Date(),
+                ticket: 'aberto'
+            }).then(() => {
+                setMsgTipo('sucesso');
+                setCarregando(0);
+            }).catch(erro => {
+                setMsgTipo('erro');
+                setCarregando(0);
+            });
         }
+    }
 
-        db.collection('pedido').add({
-            nome: nome,
-            restaurante: restaurante,
-            valor: valor,
-            pagamento: pagamento,
-            cpf: cpf,
-            endereco: endereco,
-            troco: troco,
-            usuario: usuarioEmail,
-            criacao: new Date()
-        }).then(() => {
-            setMsgTipo('sucesso');
-            setCarregando(0);
-        }).catch(erro => {
-            setMsgTipo('erro');
-            setCarregando(0);
-        });
+    function cadastrarHistorico() {
+        setMsgTipo(null);
+        setCarregando(1);
+
+        if (!pagamento || !endereco || !telefone) {
+            setMsgTipo('erro')
+            setMsg('Você precisa preencher todos os campos!')
+            setCarregando(0)
+            return;
+        } else if (troco == null) {
+            db.collection('historico_cliente').add({
+                nome: nome,
+                restaurante: restaurante,
+                valor: valor,
+                pagamento: pagamento,
+                telefone: telefone,
+                endereco: endereco,
+                usuario: usuarioEmail,
+                criacao: new Date(),
+                ticket: 'aberto'
+            }).then(() => {
+                setMsgTipo('sucesso');
+                setCarregando(0);
+            }).catch(erro => {
+                setMsgTipo('erro');
+                setCarregando(0);
+            });
+        } else {
+            db.collection('historico_cliente').add({
+                nome: nome,
+                restaurante: restaurante,
+                valor: valor,
+                pagamento: pagamento,
+                telefone: telefone,
+                troco: troco,
+                endereco: endereco,
+                usuario: usuarioEmail,
+                criacao: new Date(),
+                ticket: 'aberto'
+            }).then(() => {
+                setMsgTipo('sucesso');
+                setCarregando(0);
+            }).catch(erro => {
+                setMsgTipo('erro');
+                setCarregando(0);
+            });
+        }
     }
 
     function sacola() {
@@ -90,7 +156,7 @@ function FinalizarPedido(props) {
             valor: valor,
             restaurante: restaurante,
             pagamento: pagamento,
-            cpf: cpf,
+            telefone: telefone,
             endereco: endereco,
             troco: troco,
             usuario: usuarioEmail,
@@ -125,21 +191,21 @@ function FinalizarPedido(props) {
                                     </div>
                                 </div>
 
-                                <div className="card col-md-8 mt-5">
+                                <div className="card col-md-6 mt-5">
                                     <div className="card-body">
                                         <div>
                                             <h3>Resumo do Pedido</h3>
                                             <form className="mt-3">
                                                 <div className="form-group">
-                                                    <p onMouseMove={(e) => setRestaurante(e.target.value)}>{prato.restaurante}</p>
+                                                    <input className="form-control" type="text" onMouseMove={(e) => setRestaurante(e.target.value)} value={prato.restaurante} />
                                                 </div>
 
                                                 <div className="form-group">
-                                                    <p onMouseMove={(e) => setNome(e.target.value)}>{prato.nome}</p>
+                                                    <input className="form-control" type="text" onMouseMove={(e) => setNome(e.target.value)} value={prato.nome} />
                                                 </div>
 
                                                 <div className="form-group">
-                                                    <p onMouseMove={(e) => setValor(e.target.value)}>{prato.valor}</p>
+                                                    <input className="form-control" type="text" onMouseMove={(e) => setValor(e.target.value)} value={prato.valor} />
                                                 </div>
 
                                                 <div className="form-group">
@@ -170,7 +236,7 @@ function FinalizarPedido(props) {
                                                 </div>
 
                                                 <div className="form-group">
-                                                    <input onMouseMove={(e) => setCpf(e.target.value)} placeholder="CPF na nota" type="text" className="form-control" maxLength="14" />
+                                                    <input onMouseMove={(e) => setTelefone(e.target.value)} placeholder="Telefone para contato" type="text" className="form-control" maxLength="10" />
                                                 </div>
 
                                                 <div className="form-group">
@@ -181,7 +247,7 @@ function FinalizarPedido(props) {
                                                     <div className="text-center col">
                                                         {
                                                             carregando ? <div class="spinner-border text-warning text-center" role="status"><span class="sr-only">Loading...</span></div>
-                                                                : <button onClick={cadastrar} type="button" className="btn btn-large btn-block mt-3 mb-3 btn-cadastro">Finalizar Pedido</button>
+                                                                : <button onClick={function (event) { cadastrar(); cadastrarHistorico() }} type="button" className="btn btn-large btn-block mt-3 mb-3 btn-cadastro">Finalizar Pedido</button>
                                                         }
                                                     </div>
                                                     <div className="text-center col">
@@ -206,9 +272,9 @@ function FinalizarPedido(props) {
                                     </div>
                                 </div>
 
-
                                 <div className="col-md-2">
                                     <div className="font-weight-bold mt-3">
+                                        {msgTipo === 'sucessoSacola' && <Link to={'/'} className="btn btn-large btn-block btn-detalhes mt-2">Voltar ao Início</Link>}
                                         {msgTipo === 'sucessoSacola' && <Link to={'/sacola/meuspratos'} className="btn btn-large btn-block mt-2"><i class="fas fa-shopping-bag fa-3x mb-3"></i></Link>}
                                         {msgTipo === 'sucessoSacola' && <span className="text-break"><strong> Item adicionado a sacola! &#127881;</strong></span>}
                                     </div>

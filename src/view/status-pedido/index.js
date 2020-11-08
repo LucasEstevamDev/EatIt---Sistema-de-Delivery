@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import { useSelector } from "react-redux";
 import './status-pedido.css';
 import Navbar from '../../components/navbar';
 import Footer from '../../components/footer';
@@ -15,7 +14,7 @@ function StatusPedido(props) {
     let listapratos = [];
 
     useEffect(() => {
-        firebase.firestore().collection('pedido').get().then(async (resultado) => {
+        firebase.firestore().collection('pedido_cliente').get().then(async (resultado) => {
             setCarregando(0);
             await resultado.docs.forEach(doc => {
                 listapratos.push({
@@ -43,7 +42,6 @@ function StatusPedido(props) {
                                 </div>
                             </div>
                         </div>
-
                     </div>
             }
 

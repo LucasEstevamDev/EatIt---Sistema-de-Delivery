@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import './usuario-novo.css';
-import { useDispatch } from "react-redux";
 
 /* IMPORTAÇÃO DA ROTA */
 import { Link } from 'react-router-dom';

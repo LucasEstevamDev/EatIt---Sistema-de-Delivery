@@ -4,9 +4,6 @@ import Navbar from '../../components/navbar';
 import Footer from "../../components/footer";
 import './restaurantes-cadastro.css';
 
-/* IMPORTAÇÃO DA ROTA */
-import { Link } from 'react-router-dom';
-
 /* IMPORTAÇÃO DO FIREBASE */
 import firebase from '../../config/firebase';
 

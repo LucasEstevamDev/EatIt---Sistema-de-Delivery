@@ -6,7 +6,7 @@ import { useSelector, useDispatch } from "react-redux";
 /* IMPORTAÇÃO DA ROTA */
 import { Link } from "react-router-dom";
 
-function Navbar() {
+function Navbar(id) {
   const dispatch = useDispatch();
 
   return (
@@ -47,6 +47,12 @@ function Navbar() {
                   <Link className="nav-link" to="/status">
                     <span className="spanDropdown">Status do Pedido</span>
                   </Link>
+                  <Link className="nav-link" to="/perfilrestaurante">
+                    <span className="spanDropdown">Perfil</span>
+                  </Link>
+                  <Link className="nav-link" to="/historico-restaurante/meuspedidos">
+                    <span className="spanDropdown">Histórico</span>
+                  </Link>
                 </ul>
               </li>
 
@@ -59,7 +65,7 @@ function Navbar() {
                   <Link className="nav-link" to="/cliente">
                     <span className="spanDropdown">Completar login</span>
                   </Link>
-                  <Link className="nav-link" to="/meuperfil/meusdados">
+                  <Link className="nav-link" to="/perfil">
                     <span className="spanDropdown">Perfil</span>
                   </Link>
                   <Link className="nav-link" to="/historico/meuspedidos">

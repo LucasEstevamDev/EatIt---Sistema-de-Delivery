@@ -1,22 +1,21 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector } from "react-redux";
-import './historico.css';
+import './historico-restaurante.css';
 import Navbar from '../../components/navbar';
 import Footer from '../../components/footer';
-import HistoricoCard from '../../components/historico-card';
+import HistoricoCardRestaurante from '../../components/historico-card-restaurante';
 
 /* IMPORTAÇÃO FIREBASE */
 import firebase from '../../config/firebase';
 
-function Historico() {
+function HistoricoRestaurante() {
     const [pratos, setPratos] = useState([]);
     const [carregando, setCarregando] = useState(1);
-    const usuarioEmail = useSelector(state => state.usuarioEmail);
 
     let listapratos = [];
 
     useEffect(() => {
-        firebase.firestore().collection('historico_cliente').where('usuario', '==', usuarioEmail).get().then(async (resultado) => {
+        firebase.firestore().collection('historico_restaurante').get().then(async (resultado) => {
             setCarregando(0);
             await resultado.docs.forEach(doc => {
                 listapratos.push({
@@ -38,7 +37,7 @@ function Historico() {
                         <div className="home-content">
                             <strong><p style={{ fontSize: '30pt' }} className="col ml-3 mt-3">Histórico</p></strong>
                             <div className="col row p-3">
-                                {pratos.map(item => <HistoricoCard id={item.id} nome={item.nome} troco={item.troco} valor={item.valor} endereco={item.endereco} pagamento={item.pagamento} restaurante={item.restaurante} />)}
+                                {pratos.map(item => <HistoricoCardRestaurante nome={item.nome} endereco={item.endereco} statusPedido={item.statusPedido} usuario={item.usuario} />)}
                             </div>
                         </div>
 
@@ -52,4 +51,4 @@ function Historico() {
 }
 
 
-export default Historico;
+export default HistoricoRestaurante;

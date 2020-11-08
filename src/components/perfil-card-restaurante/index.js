@@ -1,12 +1,12 @@
 import React from 'react';
-import './perfil-card.css';
+import './perfil-card-restaurante.css';
 
-function PerfilCard({ id, cep, complemento, cpf, endereco, nome, numero, telefone }) {
+function PerfilCardRestaurante({ id, cep, complemento, cpf, endereco, nome, numero, telefone }) {
 
     return (
         <div className="col-10 mx-auto">
             <div className="mb-4 mt-3">
-                <h3 className="font-weight-bold mb-4">Meus dados</h3>
+                <h3 className="font-weight-bold mb-4">Meus dados - {nome}</h3>
             </div>
 
             <form id="form">
@@ -46,4 +46,4 @@ function PerfilCard({ id, cep, complemento, cpf, endereco, nome, numero, telefon
     )
 }
 
-export default PerfilCard;
+export default PerfilCardRestaurante;

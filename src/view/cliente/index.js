@@ -1,8 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
 import Navbar from '../../components/navbar';
 import Footer from "../../components/footer";
-import { Link } from 'react-router-dom';
 import './cliente.css';
 
 /* IMPORTAÇÃO DO FIREBASE */
@@ -31,31 +30,6 @@ function Cliente({ match }) {
     function limpar() {
         document.getElementById('form').reset();
     }
-
-    if (match.params.parametro) {
-        firebase.firestore().collection('cliente').where('usuario', '==', usuarioEmail).get().then(async (resultado) => {
-            setCarregando(0);
-            await resultado.docs.forEach(doc => {
-                listapratos.push({
-                    id: doc.id,
-                    ...doc.data()
-                })
-            })
-            setUsuario(listapratos);
-        });
-    } else {
-        firebase.firestore().collection('cliente').where('usuario', '==', usuarioEmail).get().then(async (resultado) => {
-            setCarregando(0);
-            await resultado.docs.forEach(doc => {
-                listapratos.push({
-                    id: doc.id,
-                    ...doc.data()
-                })
-            })
-            setUsuario(listapratos);
-        });
-    }
-
 
     function cadastrar() {
         setMsgTipo(null);
@@ -91,9 +65,6 @@ function Cliente({ match }) {
     return (
         <>
             <Navbar />
-            <div className="home-content">
-                <Link to="" className="btn-editar"><i class="mt-2 fas fa-3x text-dark fa-user-edit"></i></Link>
-            </div>
             <div className="col-10 mx-auto">
                 <div className="mb-4 mt-5">
                     <h3 className="font-weight-bold">Complete seu cadastro e explore essa possibilidade de sabores</h3>
@@ -109,7 +80,7 @@ function Cliente({ match }) {
                     </div>
 
                     <div className="form-group">
-                        <input onChange={(e) => setTelefone(e.target.value)} placeholder="Telefone*" type="text" className="form-control" />
+                        <input onChange={(e) => setTelefone(e.target.value)} placeholder="Telefone*" type="text" className="form-control" maxlength="10" />
                     </div>
 
                     <div className="row">
@@ -146,7 +117,7 @@ function Cliente({ match }) {
                 </form>
 
                 <div className="msg-login text-center text-center mb-1">
-                    {msgTipo === 'sucesso' && <span>Oba!<strong> Dados cadastrado com sucesso! &#128516;</strong></span>}
+                    {msgTipo === 'sucesso' && <span>Oba!<strong> Dados cadastrados com sucesso! &#128516;</strong></span>}
                     {msgTipo === 'erro' && <span>Ops!<strong> {msg} &#128533;</strong></span>}
                 </div>
             </div>

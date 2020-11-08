@@ -55,24 +55,13 @@ function Sacola(props) {
                             <div className="row">
                                 <div className="col">
                                     <div className="row p-3">
-                                        {pratos.map(item => <SacolaCard id={item.id} nome={item.nome} troco={item.troco} valor={item.valor} endereco={item.endereco} restaurante={item.restaurante} />)}
+                                        {pratos.map(item => <SacolaCard id={item.id} nome={item.nome} troco={item.troco} valor={item.valor} endereco={item.endereco} restaurante={item.restaurante} usuario={item.usuario} />)}
                                     </div>
                                 </div>
                             </div>
-
-                            <div className="row mr-2 ml-2">
-                                <div className="col-md-12 col-sm-12">
-                                    {
-                                        carregando ? <div class="spinner-border text-warning text-center" role="status"><span class="sr-only">Loading...</span></div>
-                                            : <button type="button" className="btn btn-large btn-block mt-3 mb-3 btn-cadastro btn-pedido">Finalizar Pedido</button>
-                                    }
-                                </div>
-                            </div>
                         </div>
-
                     </div>
             }
-
             <Footer />
 
         </>

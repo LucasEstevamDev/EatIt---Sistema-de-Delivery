@@ -3,12 +3,12 @@ import { useSelector } from 'react-redux';
 import './perfil.css';
 import Navbar from '../../components/navbar';
 import Footer from '../../components/footer';
-import PerfilCard from '../../components/perfil-card';
+import PerfilCardRestaurante from '../../components/perfil-card-restaurante';
 
 /* IMPORTAÇÃO FIREBASE */
 import firebase from '../../config/firebase';
 
-function Perfil({ props }) {
+function PerfilRestaurante({ props }) {
     const [pratos, setPratos] = useState([]);
     const [pesquisa, setPesquisa] = useState('');
     const [carregando, setCarregando] = useState(1);
@@ -16,7 +16,7 @@ function Perfil({ props }) {
     let listapratos = [];
 
     useEffect(() => {
-        firebase.firestore().collection('cliente').where('usuario', '==', usuarioEmail).get().then(async (resultado) => {
+        firebase.firestore().collection('restaurante').where('usuario', '==', usuarioEmail).get().then(async (resultado) => {
             setCarregando(0);
             await resultado.docs.forEach(doc => {
                 if (doc.data().nome.indexOf(pesquisa) >= 0) {
@@ -34,11 +34,11 @@ function Perfil({ props }) {
         <>
             <Navbar />
             <div className="row p-3">
-                {pratos.map(item => <PerfilCard id={item.id} cep={item.cep} complemento={item.complemento} cpf={item.cpf} endereco={item.endereco} nome={item.nome} numero={item.numero} telefone={item.telefone} />)}
+                {pratos.map(item => <PerfilCardRestaurante id={item.id} cep={item.cep} complemento={item.complemento} cpf={item.cpf} endereco={item.endereco} nome={item.nome} numero={item.numero} telefone={item.telefone} />)}
             </div>
             <Footer />
         </>
     )
 }
 
-export default Perfil;
+export default PerfilRestaurante;
