@@ -36,7 +36,7 @@ function Historico() {
                 carregando ? <div className="row"><div class="spinner-border mx-auto text-warning mt-3" role="status"><span class="sr-only"></span></div></div>
                     : <div>
                         <div className="home-content">
-                            <strong><p style={{ fontSize: '30pt' }} className="col ml-3 mt-3">Histórico</p></strong>
+                            <strong><p style={{ fontSize: '30pt' }} className="col mt-3">Histórico</p></strong>
                             <div className="col row p-3">
                                 {pratos.map(item => <HistoricoCard id={item.id} nome={item.nome} troco={item.troco} valor={item.valor} endereco={item.endereco} pagamento={item.pagamento} restaurante={item.restaurante} />)}
                             </div>

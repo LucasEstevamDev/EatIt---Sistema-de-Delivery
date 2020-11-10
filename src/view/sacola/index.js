@@ -24,38 +24,22 @@ function Sacola(props) {
                     ...doc.data()
                 })
             })
-
             setPratos(listapratos);
         });
     })
 
-    function remover() {
-        firebase.firestore().collection('sacola').where('usuario', '==', usuarioEmail).get().then(querySnapshot => {
-            querySnapshot.forEach(function (doc) {
-                doc.ref.delete();
-            });
-        });
-    }
-
     return (
         <>
             <Navbar />
-            <div className="row">
-                <div className="col my-3 mx-3">
-                    <button onClick={remover} type="button" className="btn btn-danger"><i class="fas fa-trash-alt"></i></button>
-                    <strong><span className="ml-2">Clique aqui para limpar os itens!!</span></strong>
-
-                </div>
-            </div>
-
             {
                 carregando ? <div className="row"><div class="spinner-border mx-auto text-warning mt-3" role="status"><span class="sr-only"></span></div></div>
                     : <div>
+                        <h1 className="text-center my-4">Aproveite cada pedaço!!</h1>
                         <div className="home-content">
                             <div className="row">
                                 <div className="col">
                                     <div className="row p-3">
-                                        {pratos.map(item => <SacolaCard id={item.id} nome={item.nome} troco={item.troco} valor={item.valor} endereco={item.endereco} restaurante={item.restaurante} usuario={item.usuario} />)}
+                                        {pratos.map(item => <SacolaCard id={item.id} nome={item.nome} troco={item.troco} valor={item.valor} endereco={item.endereco} telefone={item.telefone} pagamento={item.pagamento} restaurante={item.restaurante} usuario={item.usuario} />)}
                                     </div>
                                 </div>
                             </div>

@@ -110,7 +110,7 @@ function FinalizarPedido(props) {
                 endereco: endereco,
                 usuario: usuarioEmail,
                 criacao: new Date(),
-                ticket: 'aberto'
+                ticket: 'fechado'
             }).then(() => {
                 setMsgTipo('sucesso');
                 setCarregando(0);
@@ -129,7 +129,7 @@ function FinalizarPedido(props) {
                 endereco: endereco,
                 usuario: usuarioEmail,
                 criacao: new Date(),
-                ticket: 'aberto'
+                ticket: 'fechado'
             }).then(() => {
                 setMsgTipo('sucesso');
                 setCarregando(0);
@@ -151,23 +151,44 @@ function FinalizarPedido(props) {
             return;
         }
 
-        db.collection('sacola').add({
-            nome: nome,
-            valor: valor,
-            restaurante: restaurante,
-            pagamento: pagamento,
-            telefone: telefone,
-            endereco: endereco,
-            troco: troco,
-            usuario: usuarioEmail,
-            criacao: new Date()
-        }).then(() => {
-            setMsgTipo('sucessoSacola');
-            setCarregando(0);
-        }).catch(erro => {
-            setMsgTipo('erro');
-            setCarregando(0);
-        });
+        else if (troco == null) {
+            db.collection('sacola').add({
+                nome: nome,
+                restaurante: restaurante,
+                valor: valor,
+                pagamento: pagamento,
+                telefone: telefone,
+                endereco: endereco,
+                usuario: usuarioEmail,
+                criacao: new Date(),
+                ticket: 'pausado'
+            }).then(() => {
+                setMsgTipo('sucessoSacola');
+                setCarregando(0);
+            }).catch(erro => {
+                setMsgTipo('erroSacola');
+                setCarregando(0);
+            });
+        } else {
+            db.collection('sacola').add({
+                nome: nome,
+                restaurante: restaurante,
+                valor: valor,
+                pagamento: pagamento,
+                telefone: telefone,
+                troco: troco,
+                endereco: endereco,
+                usuario: usuarioEmail,
+                criacao: new Date(),
+                ticket: 'pausado'
+            }).then(() => {
+                setMsgTipo('sucessoSacola');
+                setCarregando(0);
+            }).catch(erro => {
+                setMsgTipo('erroSacola');
+                setCarregando(0);
+            });
+        }
     }
 
     return (

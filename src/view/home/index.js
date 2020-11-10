@@ -30,7 +30,6 @@ function Home() {
   return (
     <>
       <Navbar />
-
       <div className="home-content">
         <h1 className="text-center my-3">OPÇÃO PARA TODAS AS FOMES</h1>
 
@@ -46,6 +45,5 @@ function Home() {
     </>
   )
 }
-
 
 export default Home;

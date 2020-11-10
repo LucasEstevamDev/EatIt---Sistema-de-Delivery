@@ -37,7 +37,7 @@ function StatusPedido(props) {
                             <div className="row">
                                 <div className="col">
                                     <div className="row p-3">
-                                        {pratos.map(item => <StatusCard id={item.id} nome={item.nome} usuario={item.usuario} valor={item.valor} endereco={item.endereco} />)}
+                                        {pratos.map(item => <StatusCard id={item.id} nome={item.nome} usuario={item.usuario} valor={item.valor} telefone={item.telefone} pagamento={item.pagamento} valor={item.valor} endereco={item.endereco} />)}
                                     </div>
                                 </div>
                             </div>

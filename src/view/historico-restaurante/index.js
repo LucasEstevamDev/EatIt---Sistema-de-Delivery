@@ -37,7 +37,7 @@ function HistoricoRestaurante() {
                         <div className="home-content">
                             <strong><p style={{ fontSize: '30pt' }} className="col ml-3 mt-3">Histórico</p></strong>
                             <div className="col row p-3">
-                                {pratos.map(item => <HistoricoCardRestaurante nome={item.nome} endereco={item.endereco} statusPedido={item.statusPedido} usuario={item.usuario} />)}
+                                {pratos.map(item => <HistoricoCardRestaurante id={item.id} nome={item.nome} troco={item.troco} valor={item.valor} endereco={item.endereco} pagamento={item.pagamento} />)}
                             </div>
                         </div>
 
