@@ -89,12 +89,16 @@ function PratoCadastro() {
                     <div className="form-group">
                         <select id="restaurante" onChange={(e) => setRestaurante(e.target.value)} className="form-control">
                             <option disabled selected value>-- Escolha o nome do seu restaurante --</option>
-                            <option>McFavela</option>
-                            <option>Restaurante Bentô House</option>
                             <option>Açaí da Lorem</option>
+                            <option>Chaleiras</option>
+                            <option>Coco Bambu Restaurante</option>
                             <option>Habib's</option>
+                            <option>McFavela</option>
+                            <option>Outback Steakhouse</option>
                             <option>Osteria Generale</option>
                             <option>Real Burger</option>
+                            <option>Restaurante Bentô House</option>
+                            <option>Tollocos</option>
                         </select>
                     </div>
 
